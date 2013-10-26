@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @group_purchase.name %>
+</p>
+
+<p>
+  <b>Balance:</b>
+  <%= @group_purchase.balance %>
+</p>
+
+
+<%= link_to 'Edit', edit_group_purchase_path(@group_purchase) %> |
+<%= link_to 'Back', group_purchases_path %>

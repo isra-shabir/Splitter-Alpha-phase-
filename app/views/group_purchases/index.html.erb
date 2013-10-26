@@ -1,0 +1,25 @@
+<h1>Listing group_purchases</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Balance</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @group_purchases.each do |group_purchase| %>
+  <tr>
+    <td><%= group_purchase.name %></td>
+    <td><%= group_purchase.balance %></td>
+    <td><%= link_to 'Show', group_purchase %></td>
+    <td><%= link_to 'Edit', edit_group_purchase_path(group_purchase) %></td>
+    <td><%= link_to 'Destroy', group_purchase, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Group purchase', new_group_purchase_path %>
