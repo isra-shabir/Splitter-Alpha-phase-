@@ -9,8 +9,7 @@ Kwhite17IsraShabirIsabellatrombaProj3::Application.routes.draw do
     resources :invoices
   end
 
-  post "/group_purchases/:id/invoices/new"=> 'invoices#new', :as => :new_group_purchase_invoice
-
+  resources :charges
 
   root to: 'members#index'
   # The priority is based upon order of creation:
