@@ -41,13 +41,13 @@ class InvoicesController < ApplicationController
     #@invoice = Invoice.new(params[:invoice])
     @invoice = Invoice.new
     @invoice.balance = @invoice.group.balance/@invoice.group.length
-    #@invoice.debtor = @invoice
+    #@invoice.debtor = params[:debtor]
     respond_to do |format|
       if @invoice.save
-        format.html { redirect_to @invoice, notice: 'Invoice was successfully created.' }
+        format.html { redirect_to group_purchases_path, notice: 'Invoice was successfully created.' }
         format.json { render json: @invoice, status: :created, location: @invoice }
       else
-        format.html { render action: "new" }
+        format.html { render action: "new", notice: 'An error occurred.' }
         format.json { render json: @invoice.errors, status: :unprocessable_entity }
       end
     end

@@ -1,9 +1,14 @@
 <h1>Listing group_purchases</h1>
-
+<table>
+  <tr>
+    <td> Balance</td>
+    <td><%=@group_purchase.balance%></td>
+  </tr>
+</table>
 <table>
   <tr>
     <th>Name</th>
-    <th>Balance</th>
+    <th></th>
     <th></th>
     <th></th>
     <th></th>
@@ -11,18 +16,12 @@
 <% @group_purchase.members.each do |member| %>
   <tr>
     <td><%=member.name%></td>
-    
-<% @group_purchases.each do |group_purchase| %>
-  <tr>
-    <td><%= group_purchase.name %></td>
-    <td><%= group_purchase.balance %></td>
-    <td><%= link_to 'Show', group_purchase %></td>
-    <td><%= link_to 'Edit', edit_group_purchase_path(group_purchase) %></td>
-    <td><%= link_to 'Destroy', group_purchase, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <td><%=member.balance%></td>
+    <td><%= link_to 'Destroy', controller: "invoices", action: "destroy", id: Invoice.where(name: member.name).first, data: { confirm: 'Are you sure?' } %></td>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New Group purchase', new_group_purchase_path %>
+<%= link_to 'Add a member', new_invoice_path %>
