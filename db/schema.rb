@@ -14,11 +14,16 @@
 ActiveRecord::Schema.define(:version => 20131027011031) do
 
   create_table "group_purchases", :force => true do |t|
-    t.string   "name"
+    t.string   "purchaseName"
     t.string   "creatorName"
     t.float    "balance"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
+  create_table "group_purchases_members", :force => true do |t|
+    t.integer "group_purchase_id"
+    t.integer "member_id"
   end
 
   create_table "invoices", :force => true do |t|

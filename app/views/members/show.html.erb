@@ -1,2 +1,41 @@
-<h1>Members#show</h1>
-<p>Find me in app/views/members/show.html.erb</p>
+<h1>Money Owed to You</h1>
+<table>
+	<th>Purchase Name</th>
+	<th></th>
+	<th></th>
+	<th></th>
+	<th>Balance</th>
+	<%= current_member.group_purchases.each do |purchase| %>
+		<tr>
+			<%= if current_member.email == purchase.creatorName%>
+				<td><%=purchase.purchaseName%></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td><%=purchase.balance%></td>
+		</tr>
+			<%<end %>
+	<%end%>
+</table>
+
+<h1>Money You Owe</h1>
+<table>
+	<th>Purchase</th>
+	<th>Balance</th>
+	<th></th>
+	<th></th>
+	<th></th>
+	<%=current_member.group_purchases.each do |purchase| %>
+		<tr>
+			<%= if current_member.email != purchase.creatorName%>
+				<td><%=purchase.purchaseName%></td>
+				<td><%=purchase.balance%></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			<%end%>
+		</tr>
+	<%end%>
+</table>
+
+<%= link_to "Create New Purchase", new_group_purchase_path%>
