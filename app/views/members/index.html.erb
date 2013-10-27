@@ -15,7 +15,7 @@
       <th>Balance</th>
       <%= current_member.group_purchases.each do |purchase| %>
         <tr>
-          <%= if current_member.email == purchase.creatorName%>
+          <% if current_member.email == purchase.creatorName%>
             <td><%=purchase.purchaseName%></td>
             <td></td>
             <td></td>
@@ -35,7 +35,7 @@
       <th></th>
       <%=current_member.group_purchases.each do |purchase| %>
         <tr>
-          <%= if current_member.email != purchase.creatorName%>
+          <% if current_member.email != purchase.creatorName%>
             <td><%=purchase.purchaseName%></td>
             <td><%=purchase.balance%></td>
             <td></td>
