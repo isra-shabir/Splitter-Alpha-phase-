@@ -1,10 +1,16 @@
 Kwhite17IsraShabirIsabellatrombaProj3::Application.routes.draw do
+  get "members/index"
+
+  get "members/show"
+
+  devise_for :members
+
   resources :invoices
 
 
   resources :group_purchases
 
-
+  root to: 'members#index'
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
