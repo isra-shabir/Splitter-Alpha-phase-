@@ -12,7 +12,7 @@
       <% current_member.group_purchases.each do |purchase| %>
         <tr>
           <% if current_member.email == purchase.creatorName%>
-            <td><%=purchase.purchaseName%></td>
+            <td><%=link_to purchase.purchaseName,group_purchase_path(purchase)%></td>
             <td></td>
             <td></td>
             <td></td>
@@ -24,19 +24,19 @@
 
     <h3>Money You Owe</h3>
     <table class="table">
-      <th>Purchase</th>
+      <th>Purchase Name</th>
+      <th></th>
+      <th></th>
+      <th></th>
       <th>Balance</th>
-      <th></th>
-      <th></th>
-      <th></th>
       <% current_member.group_purchases.each do |purchase| %>
         <tr>
           <% if current_member.email != purchase.creatorName%>
             <td><%=purchase.purchaseName%></td>
+            <td></td>
+            <td></td>
+            <td></td>
             <td><%=purchase.balance%></td>
-            <td></td>
-            <td></td>
-            <td></td>
           <%end%>
         </tr>
       <%end%>

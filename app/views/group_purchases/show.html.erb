@@ -10,6 +10,10 @@
   <%= @group_purchase.balance %>
 </p>
 
+<p>
+  <b>Members:</b>
+  <%= @group_purchase.members.length-1 %>
+</p>
 
 
 <%= link_to 'Add an Invoice', new_group_purchase_invoice_path(@group_purchase) %> |
