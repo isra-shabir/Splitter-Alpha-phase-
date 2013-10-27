@@ -1,8 +1,8 @@
 Kwhite17IsraShabirIsabellatrombaProj3::Application.routes.draw do
+  resources :invoices
+
+
   resources :group_purchases
-
-
-  resources :members
 
 
   # The priority is based upon order of creation:
