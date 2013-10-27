@@ -5,10 +5,12 @@ Kwhite17IsraShabirIsabellatrombaProj3::Application.routes.draw do
 
   devise_for :members
 
-  resources :invoices
+  resources :group_purchases do
+    resources :invoices
+  end
 
+  post "/group_purchases/:id/invoices/new"=> 'invoices#new', :as => :new_group_purchase_invoice
 
-  resources :group_purchases 
 
   root to: 'members#index'
   # The priority is based upon order of creation:

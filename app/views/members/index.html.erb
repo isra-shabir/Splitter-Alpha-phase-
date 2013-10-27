@@ -1,9 +1,9 @@
 <div class="jumbotron">
   <% if member_signed_in? %>
-    <h1>Welcome back, trusted user!</h1>
-    <!-- New stuff -->
-    <h1>Money Owed to You</h1>
-    <table>
+    <%= link_to "Create New Purchase", new_group_purchase_path, :class=>"btn btn-primary"%>
+
+    <h3>Money Owed to You</h3>
+    <table class="table">
       <th>Purchase Name</th>
       <th></th>
       <th></th>
@@ -22,8 +22,8 @@
       <%end%>
     </table>
 
-    <h1>Money You Owe</h1>
-    <table>
+    <h3>Money You Owe</h3>
+    <table class="table">
       <th>Purchase</th>
       <th>Balance</th>
       <th></th>
@@ -42,9 +42,6 @@
       <%end%>
     </table>
 
-    <%= link_to "Create New Purchase", new_group_purchase_path%>
-    <!-- end of new stuff-->
-    <%= link_to "Sign Out", destroy_member_session_path, :method => :delete, :class => 'btn btn-large btn-danger' %>
   <% else %>
     <h1>Welcome, new user!</h1>
     <p class="lead">

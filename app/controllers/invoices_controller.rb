@@ -23,6 +23,7 @@ class InvoicesController < ApplicationController
   # GET /invoices/new
   # GET /invoices/new.json
   def new
+    @group_purchase = params[:group_purchase_id]
     @invoice = Invoice.new
     respond_to do |format|
       format.html # new.html.erb
@@ -37,12 +38,15 @@ class InvoicesController < ApplicationController
 
   # POST /invoices
   # POST /invoices.json
-  def create
+  def create    
+    @group_purchase = GroupPurchase.find(params[:group_purchase_id])
     @invoice = Invoice.new(params[:invoice])
-    @invoice.balance = @invoice.group_purchase.balance/@invoice.group_purchase.length
+    @invoice.group_purchase = @group_purchase
+    num_members = @group_purchase.members.length
+    @invoice.balance = @invoice.group_purchase.balance/num_members
     respond_to do |format|
       if @invoice.save
-        format.html { redirect_to group_purchases_path, notice: 'Invoice was successfully created.' }
+        format.html { redirect_to group_purchase_path(@group_purchase), notice: 'Invoice was successfully created.' }
         format.json { render json: @invoice, status: :created, location: @invoice }
       else
         format.html { render action: "new", notice: 'An error occurred.' }

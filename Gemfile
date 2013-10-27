@@ -9,6 +9,8 @@ gem 'sqlite3'
 gem 'bootstrap-sass'
 gem 'simple_form'
 gem 'devise'
+
+gem 'bcrypt-ruby', '3.1.1.rc1', :require => 'bcrypt'
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do

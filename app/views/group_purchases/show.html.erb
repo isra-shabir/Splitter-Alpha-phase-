@@ -12,6 +12,6 @@
 
 
 
-<%= link_to 'Add an Invoice', new_invoice_path %> |
+<%= link_to 'Add an Invoice', new_group_purchase_invoice_path(@group_purchase) %> |
 <%= link_to 'Return to Personal Page', members_index_path %> |
 <%= link_to 'Delete Purchase', @group_purchase, method: :delete, data: {confirm: 'Are you sure'} %>

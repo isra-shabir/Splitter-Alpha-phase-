@@ -2,6 +2,7 @@ class GroupPurchasesController < ApplicationController
   # GET /group_purchases
   # GET /group_purchases.json
   def index
+    puts params
     @group_purchases = GroupPurchase.all
 
     respond_to do |format|
