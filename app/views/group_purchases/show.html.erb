@@ -2,7 +2,7 @@
 
 <p>
   <b>Name:</b>
-  <%= @group_purchase.name %>
+  <%= @group_purchase.purchaseName %>
 </p>
 
 <p>
@@ -13,4 +13,5 @@
 
 
 <%= link_to 'Add an Invoice', new_invoice_path %> |
-<%= link_to 'Return to Personal Page', member_show_path %>
+<%= link_to 'Return to Personal Page', members_index_path %> |
+<%= link_to 'Delete Purchase', @group_purchase, method: :delete, data: {confirm: 'Are you sure'} %>

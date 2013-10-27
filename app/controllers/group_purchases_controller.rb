@@ -41,7 +41,8 @@ class GroupPurchasesController < ApplicationController
   # POST /group_purchases.json
   def create
     @group_purchase = GroupPurchase.new(params[:group_purchase])
-
+    @group_purchase.creatorName = current_member.email
+    current_member.group_purchases << @group_purchase
     respond_to do |format|
       if @group_purchase.save
         format.html { redirect_to @group_purchase, notice: 'Group purchase was successfully created.' }
@@ -74,10 +75,10 @@ class GroupPurchasesController < ApplicationController
   def destroy
     @group_purchase = GroupPurchase.find(params[:id])
     @group_purchase.destroy
+    redirect_to members_index_path
 
-    respond_to do |format|
-      format.html { redirect_to group_purchases_url }
-      format.json { head :no_content }
-    end
+    # respond_to do |format|
+    #   format.html { redirect_to members_index_path }
+    #   format.json { head :no_content }
   end
 end

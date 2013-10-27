@@ -38,10 +38,8 @@ class InvoicesController < ApplicationController
   # POST /invoices
   # POST /invoices.json
   def create
-    #@invoice = Invoice.new(params[:invoice])
-    @invoice = Invoice.new
-    @invoice.balance = @invoice.group.balance/@invoice.group.length
-    #@invoice.debtor = params[:debtor]
+    @invoice = Invoice.new(params[:invoice])
+    @invoice.balance = @invoice.group_purchase.balance/@invoice.group_purchase.length
     respond_to do |format|
       if @invoice.save
         format.html { redirect_to group_purchases_path, notice: 'Invoice was successfully created.' }
