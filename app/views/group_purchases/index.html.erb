@@ -15,9 +15,9 @@
   </tr>
 <% @group_purchase.members.each do |member| %>
   <tr>
-    <td><%=member.name%></td>
+    <td><%=member.email%></td>
     <td><%=member.balance%></td>
-    <td><%= link_to 'Destroy', controller: "invoices", action: "destroy", id: Invoice.where(name: member.name).first, data: { confirm: 'Are you sure?' } %></td>
+    <td><%= link_to 'Destroy', controller: "invoices", action: "destroy", id: Invoice.where(name: member.email).first, data: { confirm: 'Are you sure?' } %></td>
   </tr>
 <% end %>
 </table>

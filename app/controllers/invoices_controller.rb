@@ -40,6 +40,7 @@ class InvoicesController < ApplicationController
   # POST /invoices.json
   def create    
     @group_purchase = GroupPurchase.find(params[:group_purchase_id])
+    @group_purchase.members << Member.where(email: params[:invoice][:debtor]).first
     @invoice = Invoice.new(params[:invoice])
     @invoice.group_purchase = @group_purchase
     num_members = @group_purchase.members.length
