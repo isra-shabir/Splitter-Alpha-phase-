@@ -46,7 +46,9 @@ class InvoicesController < ApplicationController
         @invoice = Invoice.new(params[:invoice])
         @invoice.group_purchase = @group_purchase
         num_members = @group_purchase.members.length
-        @invoice.balance = @invoice.group_purchase.balance/num_members
+        @group_purchase.invoices.each do |charge|
+          charge.balance = charge.group_purchase.balance/(num_members-1)
+        end
           if @invoice.save
             format.html { redirect_to group_purchase_path(@group_purchase), notice: 'Invoice was successfully created.' }
             format.json { render json: @invoice, status: :created, location: @invoice }

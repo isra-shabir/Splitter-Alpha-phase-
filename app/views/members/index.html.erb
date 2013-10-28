@@ -32,11 +32,15 @@
       <% current_member.group_purchases.each do |purchase| %>
         <tr>
           <% if current_member.email != purchase.creatorName%>
-            <td><%=purchase.purchaseName%></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td><%=purchase.balance%></td>
+            <% purchase.invoices.each do |invoice| %>
+              <%if current_member.email == invoice.debtor%>
+                <td><%=purchase.purchaseName%></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td><%=invoice.balance%></td>
+              <%end%>
+            <%end%>
           <%end%>
         </tr>
       <%end%>
