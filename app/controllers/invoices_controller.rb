@@ -36,13 +36,32 @@ class InvoicesController < ApplicationController
     @invoice = Invoice.find(params[:id])
   end
 
+  def find_members
+    @group_purchase = GroupPurchase.find(params[:group_purchase_id])    
+    members = Member.search(params[:q]).map { |m| {:id => m.id, :name => m.email } }
+    #remove user if it is you
+    members_edit = Array.new
+    members.each do |mbr|
+      puts mbr
+      contains_member = @group_purchase.members.include?(Member.find(mbr[:id]))
+      unless mbr[:name] == current_member.email or contains_member
+        members_edit.push(mbr)
+      end
+    end
+    members_edit.to_json
+    respond_to do |format|
+      format.html
+      format.json { render :json => members_edit}
+    end
+  end
+
   # POST /invoices
   # POST /invoices.json
   def create
     respond_to do |format|
       begin    
         @group_purchase = GroupPurchase.find(params[:group_purchase_id])
-        @group_purchase.members << Member.where(email: params[:invoice][:debtor]).first
+        @group_purchase.members << Member.where(id: params[:invoice][:debtor]).first
         @invoice = Invoice.new(params[:invoice])
         @invoice.group_purchase = @group_purchase
         num_members = @group_purchase.members.length

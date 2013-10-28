@@ -14,7 +14,12 @@ class GroupPurchasesController < ApplicationController
   # GET /group_purchases/1.json
   def show
     @group_purchase = GroupPurchase.find(params[:id])
-
+    @debitors = Array.new
+    @group_purchase.members.each do |member|
+      unless member.email == @group_purchase.creatorName
+        @debitors.push(member)
+      end
+    end
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @group_purchase }

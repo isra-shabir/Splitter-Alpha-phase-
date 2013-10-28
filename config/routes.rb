@@ -2,6 +2,8 @@ Kwhite17IsraShabirIsabellatrombaProj3::Application.routes.draw do
   get "members/index"
 
   get "members/show"
+  
+  get "group_purchases/:group_purchase_id/invoices/find_members" => 'invoices#find_members', :as => :find_members
 
   devise_for :members
 
@@ -10,7 +12,6 @@ Kwhite17IsraShabirIsabellatrombaProj3::Application.routes.draw do
   end
 
   resources :charges
-
   root to: 'members#index'
   # The priority is based upon order of creation:
   # first created -> highest priority.

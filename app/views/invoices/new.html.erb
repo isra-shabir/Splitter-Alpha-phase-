@@ -1,3 +1,14 @@
+<script type="text/javascript">
+console.log('hello')
+$(document).ready(function () {
+	$("#invoice_debtor").tokenInput('find_members',
+	    {
+	      crossDomain: false,
+	      theme: "facebook"}
+	      )
+})
+
+</script>
 <h1>New invoice</h1>
 
 <%= render 'form' %>

@@ -9,4 +9,12 @@ class Member < ActiveRecord::Base
   # attr_accessible :title, :body
 
   has_and_belongs_to_many :group_purchases
+
+  def self.search(search)
+    if search
+      where('email LIKE ?', "%#{search}%")
+    else
+      scoped
+    end
+  end
 end

@@ -5,54 +5,27 @@
     <h3>Money Owed to You</h3>
     <table class="table">
       <th>Purchase Name</th>
-      <th></th>
-      <th></th>
-      <th></th>
       <th>Balance</th>
-      <% current_member.group_purchases.each do |purchase| %>
+      <% @purchases_creditor.each do |purchase| %>
         <tr>
-          <% if current_member.email == purchase.creatorName%>
-            <td><%=link_to purchase.purchaseName,group_purchase_path(purchase)%></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td><%=purchase.balance%></td>
+          <td><%=link_to purchase.purchaseName,group_purchase_path(purchase)%></td>
+          <td><%=purchase.balance%></td>
         </tr>
-          <%end %>
       <%end%>
     </table>
 
     <h3>Money You Owe</h3>
     <table class="table">
       <th>Purchase Name</th>
-      <th></th>
-      <th></th>
-      <th></th>
       <th>Balance</th>
-      <th></th>
-      <% current_member.group_purchases.each do |purchase| %>
+        <% @purchases_debitor.each do |purchase| %>
         <tr>
-          <% if current_member.email != purchase.creatorName%>
-            <% purchase.invoices.each do |invoice| %>
-              <%if current_member.email == invoice.debtor%>
-                <td><%=purchase.purchaseName%></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td><%=invoice.balance%></td>
-                <td>
-                  <%= form_tag charges_path do %>
-                  <script src="https://checkout.stripe.com/v2/checkout.js" class="stripe-button" data-key="<%= Rails.configuration.stripe[:publishable_key] %>" data-description="<%= purchase.purchaseName %>" data-amount="<%= invoice.balance.to_i*100 %>">
-                  </script>
-                  <% end %>
-                </td>
-              <%end%>
-            <%end%>
-          <%end%>
+          <!--<td><%=link_to purchase.purchaseName,group_purchase_path(purchase)%></td>-->
+          <td><%= purchase.purchaseName %></td>
+          <td><%=purchase.balance%></td>
         </tr>
       <%end%>
     </table>
-
   <% else %>
     <h1>Welcome, new user!</h1>
     <p class="lead">

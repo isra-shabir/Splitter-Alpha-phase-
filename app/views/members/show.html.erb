@@ -1,20 +1,12 @@
 <h1>Money Owed to You</h1>
 <table>
 	<th>Purchase Name</th>
-	<th></th>
-	<th></th>
-	<th></th>
 	<th>Balance</th>
-	<%= current_member.group_purchases.each do |purchase| %>
+	<%= @purchases_creditor.each do |purchase| %>
 		<tr>
-			<%= if current_member.email == purchase.creatorName%>
-				<td><%=purchase.purchaseName%></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td><%=purchase.balance%></td>
-		</tr>
-			<%<end %>
+			<td><%=purchase.purchaseName%></td>
+			<td><%=purchase.balance%></td>
+	</tr>
 	<%end%>
 </table>
 
@@ -22,18 +14,10 @@
 <table>
 	<th>Purchase</th>
 	<th>Balance</th>
-	<th></th>
-	<th></th>
-	<th></th>
-	<%=current_member.group_purchases.each do |purchase| %>
+	<%=@purchases_debitor.each do |purchase| %>
 		<tr>
-			<%= if current_member.email != purchase.creatorName%>
-				<td><%=purchase.purchaseName%></td>
-				<td><%=purchase.balance%></td>
-				<td></td>
-				<td></td>
-				<td></td>
-			<%end%>
+			<td><%=purchase.purchaseName%></td>
+			<td><%=purchase.balance%></td>
 		</tr>
 	<%end%>
 </table>
