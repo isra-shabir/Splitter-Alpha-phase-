@@ -8,7 +8,6 @@ gem 'rails', '3.2.13'
 gem 'bootstrap-sass'
 gem 'simple_form'
 gem 'devise'
-
 gem 'bcrypt-ruby', '3.1.1.rc1', :require => 'bcrypt'
 # Gems used only for assets and not required
 # in production environments by default.
@@ -40,7 +39,7 @@ gem 'jquery-rails'
 # gem 'debugger'
 
 group :development, :test do
-	gem 'sqlite3'
+	gem "sqlite3" , "~> 1.3.5"
 end
 
 group :production do
