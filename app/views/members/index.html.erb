@@ -29,6 +29,7 @@
       <th></th>
       <th></th>
       <th>Balance</th>
+      <th></th>
       <% current_member.group_purchases.each do |purchase| %>
         <tr>
           <% if current_member.email != purchase.creatorName%>
@@ -39,6 +40,12 @@
                 <td></td>
                 <td></td>
                 <td><%=invoice.balance%></td>
+                <td>
+                  <%= form_tag charges_path do %>
+                  <script src="https://checkout.stripe.com/v2/checkout.js" class="stripe-button" data-key="<%= Rails.configuration.stripe[:publishable_key] %>" data-description="<%= purchase.purchaseName %>" data-amount="<%= invoice.balance.to_i*100 %>">
+                  </script>
+                  <% end %>
+                </td>
               <%end%>
             <%end%>
           <%end%>
@@ -62,3 +69,4 @@
     </div>
   <% end %>
 </div>
+<%#= link_to invoice.balance, group_purchase_invoice_path(purchase, invoice) %>
