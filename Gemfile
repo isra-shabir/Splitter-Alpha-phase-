@@ -39,12 +39,12 @@ gem 'jquery-rails'
 # To use debugger
 # gem 'debugger'
 
-group :development, :test do
-   gem 'sqlite3'
+group :development, :test do
+	gem 'sqlite3'
 end
 
-group :production do
-   gem 'pg'
+group :production do
+	gem 'pg'
 end
 
 gem 'stripe', :git => 'https://github.com/stripe/stripe-ruby'
