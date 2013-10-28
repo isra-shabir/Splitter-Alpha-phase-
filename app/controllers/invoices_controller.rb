@@ -38,20 +38,24 @@ class InvoicesController < ApplicationController
 
   # POST /invoices
   # POST /invoices.json
-  def create    
-    @group_purchase = GroupPurchase.find(params[:group_purchase_id])
-    @group_purchase.members << Member.where(email: params[:invoice][:debtor]).first
-    @invoice = Invoice.new(params[:invoice])
-    @invoice.group_purchase = @group_purchase
-    num_members = @group_purchase.members.length
-    @invoice.balance = @invoice.group_purchase.balance/num_members
+  def create
     respond_to do |format|
-      if @invoice.save
-        format.html { redirect_to group_purchase_path(@group_purchase), notice: 'Invoice was successfully created.' }
-        format.json { render json: @invoice, status: :created, location: @invoice }
-      else
-        format.html { render action: "new", notice: 'An error occurred.' }
-        format.json { render json: @invoice.errors, status: :unprocessable_entity }
+      begin    
+        @group_purchase = GroupPurchase.find(params[:group_purchase_id])
+        @group_purchase.members << Member.where(email: params[:invoice][:debtor]).first
+        @invoice = Invoice.new(params[:invoice])
+        @invoice.group_purchase = @group_purchase
+        num_members = @group_purchase.members.length
+        @invoice.balance = @invoice.group_purchase.balance/num_members
+          if @invoice.save
+            format.html { redirect_to group_purchase_path(@group_purchase), notice: 'Invoice was successfully created.' }
+            format.json { render json: @invoice, status: :created, location: @invoice }
+          else
+            format.html { render action: "new", notice: 'An error occurred.' }
+            format.json { render json: @invoice.errors, status: :unprocessable_entity }
+          end
+      rescue
+        format.html {redirect_to new_group_purchase_invoice_path, notice: 'Invalid email.'}
       end
     end
   end
