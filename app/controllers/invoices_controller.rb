@@ -2,10 +2,10 @@ class InvoicesController < ApplicationController
   # GET /invoices
   # GET /invoices.json
   def index
-    @invoices = Invoice.all
+    #@invoices = Invoice.all
 
     respond_to do |format|
-      format.html # index.html.erb
+      format.html {redirect_to members_index, notice: 'Link prohibited.'}
       format.json { render json: @invoices }
     end
   end

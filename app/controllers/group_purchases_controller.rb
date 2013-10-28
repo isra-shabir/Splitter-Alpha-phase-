@@ -2,11 +2,10 @@ class GroupPurchasesController < ApplicationController
   # GET /group_purchases
   # GET /group_purchases.json
   def index
-    puts params
-    @group_purchases = GroupPurchase.all
-
+    #puts params
+    #@group_purchases = GroupPurchase.all
     respond_to do |format|
-      format.html # index.html.erb
+      format.html {redirect_to members_index_path, notice: 'Link prohibited.'}
       format.json { render json: @group_purchases }
     end
   end
