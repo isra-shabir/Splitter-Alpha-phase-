@@ -18,11 +18,11 @@
 </p>
 <p>
 	<b>Debitors:</b>
-	<ul class="list-group">
-	<% @debitors.each do |debitor| %>
-		<li class="list-group-item"><%= debitor.email %></li>
+	<ul>
+		<% @debitors.each do |debitor| %>
+			<li><%=debitor.email%></li>
+		<% end %>
 	</ul>
-	<% end %>
 </p>
 
 <%= link_to 'Add a Debitor', new_group_purchase_invoice_path(@group_purchase) %> |

@@ -136,7 +136,7 @@ PLATFORMS
 
 DEPENDENCIES
   bcrypt-ruby (= 3.1.1.rc1)
-  bootstrap-sass (~> 3.0.0.0.rc)
+  bootstrap-sass
   coffee-rails (~> 3.2.1)
   devise
   jquery-rails
