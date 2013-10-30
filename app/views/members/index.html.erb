@@ -21,7 +21,7 @@
         <% @invoices_debitor.each do |invoice| %>
         <tr>
           <td><%= invoice.group_purchase.purchaseName %></td>
-          <td><%=invoice.group_purchase.balance%></td>
+          <td><%=invoice.balance%></td>
         </tr>
       <%end%>
     </table>
