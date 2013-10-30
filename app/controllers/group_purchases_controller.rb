@@ -14,12 +14,9 @@ class GroupPurchasesController < ApplicationController
   # GET /group_purchases/1.json
   def show
     @group_purchase = GroupPurchase.find(params[:id])
-    @debitors = Array.new
-    @group_purchase.members.each do |member|
-      unless member.email == @group_purchase.creatorName
-        @debitors.push(member)
-      end
-    end
+    puts 'grouppurchase id'
+    puts @group_purchase.id
+    @debtors = @group_purchase.debtors
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @group_purchase }
@@ -30,7 +27,6 @@ class GroupPurchasesController < ApplicationController
   # GET /group_purchases/new.json
   def new
     @group_purchase = GroupPurchase.new
-
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @group_purchase }
@@ -47,7 +43,7 @@ class GroupPurchasesController < ApplicationController
   def create
     @group_purchase = GroupPurchase.new(params[:group_purchase])
     @group_purchase.creatorName = current_member.email
-    current_member.group_purchases << @group_purchase
+    @group_purchase.creditor = current_member
     respond_to do |format|
       if @group_purchase.save
         format.html { redirect_to @group_purchase, notice: 'Group purchase was successfully created.' }

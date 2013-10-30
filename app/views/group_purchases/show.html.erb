@@ -10,17 +10,17 @@
 
 <p>
   <b>Number of Members:</b>
-  <%= @group_purchase.members.length-1 %>
+  <%= @num_debtors %>
 </p>
 <p>
 	<b>Creditor:</b>
-	<%= @group_purchase.creatorName%></li>
+	<%= @group_purchase.creditor.email%></li>
 </p>
 <p>
-	<b>Debitors:</b>
+	<b>Debtors:</b>
 	<ul>
-		<% @debitors.each do |debitor| %>
-			<li><%=debitor.email%></li>
+		<% @debtors.each do |debtor| %>
+			<li><%=debtor.email%></li>
 		<% end %>
 	</ul>
 </p>

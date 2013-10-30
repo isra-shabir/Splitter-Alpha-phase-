@@ -14,6 +14,8 @@
   <div class="field">
     <%= f.label "Please enter the email address of the debtor" %><br />
     <%= f.text_field :debtor %>
+    <br><div>Please enter the amount that this person owes.<br> The maximum value is the current balance of the group: <%=@group_purchase.balance.to_s%></div><br/>
+    <%= f.number_field :balance ,:step=>".01",:max=>@group_purchase.balance ,:min=>"0"%>
   </div>
   <div class="actions">
     <%= f.submit "Create Invoice", :class=>"btn" %>

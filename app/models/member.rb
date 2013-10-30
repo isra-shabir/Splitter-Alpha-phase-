@@ -7,9 +7,10 @@ class Member < ActiveRecord::Base
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me
   # attr_accessible :title, :body
-
-  has_and_belongs_to_many :group_purchases
-
+  has_many :invoices, :foreign_key=>"debtor_id"
+  has_many :group_purchases, :through=> :invoices
+  has_many :created_group_purchases, :class_name=>"GroupPurchase", :foreign_key=> "creditor_id"
+  
   def self.search(search)
     if search
       where('email LIKE ?', "%#{search}%")
@@ -17,4 +18,5 @@ class Member < ActiveRecord::Base
       scoped
     end
   end
+
 end

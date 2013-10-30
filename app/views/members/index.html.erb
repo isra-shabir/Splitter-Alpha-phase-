@@ -18,11 +18,10 @@
     <table class="table">
       <th>Purchase Name</th>
       <th>Balance</th>
-        <% @purchases_debitor.each do |purchase| %>
+        <% @invoices_debitor.each do |invoice| %>
         <tr>
-          <!--<td><%=link_to purchase.purchaseName,group_purchase_path(purchase)%></td>-->
-          <td><%= purchase.purchaseName %></td>
-          <td><%=purchase.balance%></td>
+          <td><%= invoice.group_purchase.purchaseName %></td>
+          <td><%=invoice.group_purchase.balance%></td>
         </tr>
       <%end%>
     </table>

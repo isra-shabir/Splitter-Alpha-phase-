@@ -3,7 +3,6 @@ class InvoicesController < ApplicationController
   # GET /invoices.json
   def index
     #@invoices = Invoice.all
-
     respond_to do |format|
       format.html {redirect_to members_index, notice: 'Link prohibited.'}
       format.json { render json: @invoices }
@@ -23,7 +22,7 @@ class InvoicesController < ApplicationController
   # GET /invoices/new
   # GET /invoices/new.json
   def new
-    @group_purchase = params[:group_purchase_id]
+    @group_purchase = GroupPurchase.find(params[:group_purchase_id])
     @invoice = Invoice.new
     respond_to do |format|
       format.html # new.html.erb
@@ -42,9 +41,11 @@ class InvoicesController < ApplicationController
     #remove user if it is you
     members_edit = Array.new
     members.each do |mbr|
+      is_debtor = @group_purchase.debtors.include?(Member.find(mbr[:id]))
       puts mbr
-      contains_member = @group_purchase.members.include?(Member.find(mbr[:id]))
-      unless mbr[:name] == current_member.email or contains_member
+      puts @group_purchase.creditor.email
+      is_creditor =  @group_purchase.creditor.email == mbr[:name]
+      unless is_creditor or is_debtor
         members_edit.push(mbr)
       end
     end
@@ -59,14 +60,21 @@ class InvoicesController < ApplicationController
   # POST /invoices.json
   def create
     respond_to do |format|
-      begin    
+      # begin    
         @group_purchase = GroupPurchase.find(params[:group_purchase_id])
-        @group_purchase.members << Member.where(id: params[:invoice][:debtor]).first
-        @invoice = Invoice.new(params[:invoice])
+        @invoice = Invoice.new
+        @invoice.debtor = Member.where(id: params[:invoice][:debtor]).first
         @invoice.group_purchase = @group_purchase
-        num_members = @group_purchase.members.length
+        @invoice.balance = params[:invoice][:balance]
+        @invoice.save
+        # this code could be moved to the model where the balance is calculated as all of the invoices
+        # that are a part of that group_purchase's balance (this would be a good thing to test too!!)
+        @group_purchase.balance = @group_purchase.balance - params[:invoice][:balance].to_f
+        @group_purchase.save
+        
+        @num_debtors = @group_purchase.debtors.length
         @group_purchase.invoices.each do |charge|
-          charge.balance = charge.group_purchase.balance/(num_members-1)
+          charge.balance = charge.group_purchase.balance/(@num_debtors)
         end
           if @invoice.save
             format.html { redirect_to group_purchase_path(@group_purchase), notice: 'Invoice was successfully created.' }
@@ -75,9 +83,9 @@ class InvoicesController < ApplicationController
             format.html { render action: "new", notice: 'An error occurred.' }
             format.json { render json: @invoice.errors, status: :unprocessable_entity }
           end
-      rescue
-        format.html {redirect_to new_group_purchase_invoice_path, notice: 'Invalid email.'}
-      end
+      # rescue
+      #   format.html {redirect_to new_group_purchase_invoice_path, notice: 'Invalid email.'}
+      # end
     end
   end
 

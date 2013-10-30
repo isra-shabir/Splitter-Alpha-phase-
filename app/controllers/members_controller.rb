@@ -2,28 +2,15 @@ class MembersController < ApplicationController
   before_filter :authenticate_member!
   def index
   	if member_signed_in?
-  		@purchases_creditor = Array.new
-      @purchases_debitor = Array.new
-      current_member.group_purchases.each do |purchase|
-        if purchase.creatorName == current_member.email
-          @purchases_creditor.push(purchase)
-        else
-          @purchases_debitor.push(purchase)
-        end
-      end
+        puts current_member.email
+  		 @purchases_creditor = current_member.created_group_purchases
+       @invoices_debitor = current_member.invoices
   	end
   end
 
   def show
-    @purchases_creditor = Array.new
-    @purchses_debitor = Array.new
-    current_member.group_purchases.each do |purchase|
-      if purchase.creatorName == current_member.email
-        @purchases_creditor.push(purchase)
-      else
-        @purchases_debitor.push(purchase)
-      end
-    end
+    @purchases_creditor = current_member.created_group_purchases
+    @invoices_debitor = current_member.invoices
   	respond_to do |format|
   		format.html
     end
