@@ -20,4 +20,13 @@ class Member < ActiveRecord::Base
     end
   end
 
+  def paid_invoices
+    self.invoices.select { |inv| inv.paid }
+  end
+
+  def unpaid_invoices
+    self.invoices.select { |inv| not inv.paid }
+  end
+
+
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131031063229) do
+ActiveRecord::Schema.define(:version => 20131031083514) do
 
   create_table "group_purchases", :force => true do |t|
     t.string   "purchaseName"
@@ -26,10 +26,11 @@ ActiveRecord::Schema.define(:version => 20131031063229) do
     t.integer  "group_purchase_id"
     t.text     "reason"
     t.float    "balance"
-    t.datetime "created_at",        :null => false
-    t.datetime "updated_at",        :null => false
+    t.datetime "created_at",                           :null => false
+    t.datetime "updated_at",                           :null => false
     t.integer  "debtor_id"
     t.integer  "member_id"
+    t.boolean  "paid",              :default => false
   end
 
   create_table "members", :force => true do |t|

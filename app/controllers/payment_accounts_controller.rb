@@ -50,10 +50,8 @@ class PaymentAccountsController < ApplicationController
       :statement_descriptor => "should have invoice detail"
     )
 
-    puts "xxxxxxxxxxxxxxxxxxxxxxxxxxx"
-    p transfer
-    puts "---------------------------"
-    # invoice.delete
+    invoice.paid = true
+    invoice.save
 
     redirect_to :root, notice: 'Payment successfull.'
 
