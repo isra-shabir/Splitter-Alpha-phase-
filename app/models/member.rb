@@ -10,7 +10,8 @@ class Member < ActiveRecord::Base
   has_many :invoices, :foreign_key=>"debtor_id"
   has_many :group_purchases, :through=> :invoices
   has_many :created_group_purchases, :class_name=>"GroupPurchase", :foreign_key=> "creditor_id"
-  
+  has_one  :payment_account
+
   def self.search(search)
     if search
       where('email LIKE ?', "%#{search}%")

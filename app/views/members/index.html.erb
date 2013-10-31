@@ -22,9 +22,23 @@
         <tr>
           <td><%= invoice.group_purchase.purchaseName %></td>
           <td><%=invoice.balance%></td>
+          <td><%= link_to "Pay", transfer_payment_account_path(id: @payment_account.id, invoice_id: invoice.id), method: :post, class: "btn-primary, btn-large" %></td>
         </tr>
       <%end%>
     </table>
+
+    <h3>Money You Paid</h3>
+    <table class="table">
+      <th>Purchase Name</th>
+      <th>Balance</th>
+        <% @invoices_debited.each do |invoice| %>
+        <tr>
+          <td><%= invoice.group_purchase.purchaseName %></td>
+          <td><%=invoice.balance%></td>
+        </tr>
+      <%end%>
+    </table>
+
   <% else %>
     <h1>Welcome, new user!</h1>
     <p class="lead">

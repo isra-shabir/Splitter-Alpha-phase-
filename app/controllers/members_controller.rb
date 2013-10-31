@@ -2,9 +2,10 @@ class MembersController < ApplicationController
   before_filter :authenticate_member!
   def index
   	if member_signed_in?
-        puts current_member.email
-  		 @purchases_creditor = current_member.created_group_purchases
-       @invoices_debitor = current_member.invoices
+      puts current_member.email
+  		@purchases_creditor = current_member.created_group_purchases
+      @invoices_debitor = current_member.invoices
+      @payment_account  = current_member.payment_account
   	end
   end
 

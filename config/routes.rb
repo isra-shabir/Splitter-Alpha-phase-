@@ -11,7 +11,13 @@ Kwhite17IsraShabirIsabellatrombaProj3::Application.routes.draw do
     resources :invoices
   end
 
-  resources :charges
+  resources :payment_accounts do
+    member do
+      post :transfer
+    end
+  end
+
+
   root to: 'members#index'
   # The priority is based upon order of creation:
   # first created -> highest priority.

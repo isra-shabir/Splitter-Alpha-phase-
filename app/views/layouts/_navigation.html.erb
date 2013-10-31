@@ -11,7 +11,10 @@
   <% end %>
   <% if member_signed_in? %>
     <li>
-    <%= link_to('Edit account', edit_member_registration_path) %>
+    <%= link_to('Edit User Account', edit_member_registration_path) %>
+    </li>
+    <li>
+    <%= link_to('Payment Account', edit_payment_account_path(@payment_account)) %>
     </li>
   <% else %>
     <li>
